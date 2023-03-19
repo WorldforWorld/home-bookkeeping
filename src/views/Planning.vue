@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Планирование</h3>
+      <h3>{{'Menu_Planning' | localize}}</h3>
       <h4>{{info.bill | currency('RUB')}}</h4>
     </div>
+
     <Loader v-if="loading"/>
-    
-    <p class="center" v-else-if="!categories.length">Категорий пока нет. <router-link to="/categories">Добавить новую категорию</router-link></p>
+
+    <p class="center" v-else-if="!categories.length">{{'NoCategories' | localize}}. <router-link to="/categories">Добавить новую категорию</router-link></p>
 
     <section v-else>
       <div v-for="cat of categories" :key="cat.id">
@@ -44,6 +45,7 @@ export default {
   async mounted() {
     const records = await this.$store.dispatch('fetchRecords');
     const categories = await this.$store.dispatch('fetchCategories');
+
     this.categories = categories.map(cat => {
       const spend = records
         .filter(r => r.categoryId === cat.id)
@@ -59,6 +61,7 @@ export default {
         : percent < 100
         ? 'yellow'
         : 'red'
+
       const tooltipValue = cat.limit - spend;
       const tooltip = `${tooltipValue < 0 ? 'Превышение на' : 'Осталось'} ${currencyFilter(Math.abs(tooltipValue))}`
       return {
@@ -69,6 +72,7 @@ export default {
         tooltip
       }
     })
+
     this.loading = false;
   }
 }

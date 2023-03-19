@@ -33,13 +33,14 @@ Vue.component('Loader', Loader)
 Vue.component('Paginate', Paginate)
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCHaWxYBog4VB4ahClInHpRP07pVx5pnYU",
-  authDomain: "vue-crm-114d3.firebaseapp.com",
-  databaseURL: "https://vue-crm-114d3-default-rtdb.firebaseio.com",
-  projectId: "vue-crm-114d3",
-  storageBucket: "vue-crm-114d3.appspot.com",
-  messagingSenderId: "404056385866",
-  appId: "1:404056385866:web:ffd7220ff99e600ddff9b3"
+  apiKey: process.env.VUE_APP_API_KEY,
+
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_DATABASE_URL,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STOREAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGE_SENDER_ID,
+  appId: process.env.VUE_APP_ID,
 })
 
 let app
@@ -49,7 +50,7 @@ firebase.auth().onAuthStateChanged(() => {
     app = new Vue({
       router,
       store,
-      render: h => h(App)
+      render: (h) => h(App),
     }).$mount('#app')
   }
 })
