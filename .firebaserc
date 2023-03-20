@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "vue-crm-114d3"
-  }
+    "default": "home-bookkeeping-fe3e2",
+    "project": "home-bookkeeping-fe3e2"
+  },
+  "targets": {},
+  "etags": {}
 }
